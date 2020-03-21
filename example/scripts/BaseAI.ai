@@ -1,0 +1,18 @@
+{
+  "ai": "BaseAI",
+  "behaviourTree": {
+    "type": "sequence",
+    "child": [
+      {
+        "type": "decoratorIf",
+        "name": "Search",
+        "const": [ { "dist": 7 } ],
+        "child": {
+          "type": "execution",
+          "name": "Follow",
+          "const": []
+        }
+      }
+    ]
+  }
+}
