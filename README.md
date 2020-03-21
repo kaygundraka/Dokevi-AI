@@ -59,10 +59,54 @@ If you want to build this project, just add this porject's source and header to 
       }
     );
     </code></pre>
+    
++ Generate Agent
+  <pre><code> std::shared_ptr<Agent> AIScriptDB::CreateAgent(std::string inAiName) </code></pre>
+
++ Update Agent
+  - The agent update at game update time using uuid and elapsed time.
+  <pre><code>std::shared_ptr<Agent> aiAgent;
+  aiAgent->_behaviourTree.Run(uuid, timeDelta);
+  </code></pre>
 
 ## Write Script
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
+The ai-agent script type is json-file. A script file is mapped onle one ai. The ai-element must write the same name as the file.
+
+You should write root node type as sequence node. If you add new node by code, you can use by name-element in script. const-array element is delivered cpp lamda parameter. (ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap) The root node is looping own child array.
+
+The example show ai-agent behaviours. The agent search targets between 2 and 10 distances. And then if the agent confirm target, they follow target. If the agent can attack to target, they start attacking.
+
++ example
+  <pre><code>{
+    "ai": "baseAI",
+    "behaviourTree": {
+      "type": "sequence",
+      "child": [
+        {
+          "type": "decoratorIf",
+          "name": "Search",
+          "const": [ { "nearDist": 2 }, { "farDist": 10 } ],
+          "child": {
+            "type": "execution",
+            "name": "Follow",
+            "const": []
+          }
+        },
+        {
+          "type": "decoratorIf",
+          "name": "CanAttack",
+          "const": [ { "nearDist": 0 }, { "farDist": 2 } ],
+          "child": {
+            "type": "execution",
+            "name": "Attack",
+            "const": []
+          }
+        }
+      ]
+    }
+  }
+  </code></pre>
 
 ## Release History
 
