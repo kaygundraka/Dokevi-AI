@@ -6,7 +6,7 @@
 ![platform](https://img.shields.io/badge/platform-windows-brightgreen.svg)
 
 Dokevi-AI provides to generate behaviour tree ai agent. you can write ai using json-sciprt.
-When first turned on process, ai agent of script is cached on memory.
+When first turned on process, ai agent of script is cached on memory. And then, This project is not thread-safe.
 
 This project include rapid-json library. (BSD License Open Source Library)
 https://github.com/Tencent/rapidjson
