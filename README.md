@@ -1,5 +1,5 @@
 # Dokevi-AI
-> this project can use easier to make game ai in c++ server using json script.
+> The Dokevi-AI can you to use easier making game ai in c++ server using json script.
 
 ![version](https://img.shields.io/badge/alpha-v1.0.0-blue.svg)
 ![language](https://img.shields.io/badge/language-c%2B%2B-green.svg)
