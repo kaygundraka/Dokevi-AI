@@ -13,7 +13,7 @@ https://github.com/Tencent/rapidjson
 
 ## Installation
 
-If you want to build this project, just add this porject's header to your project.
+If you want to build this project, just add this project's header to your project.
 > Only used header file type.
 
 ## Guide and Example
@@ -34,14 +34,14 @@ If you want to build this project, just add this porject's header to your projec
     ```cpp
     #define AI_CHECK_CONDITION_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```
-  - you can regist lamda logic by AIScriptDB class.
+  - you can register lamda logic by AIScriptDB class.
     ```cpp
     void RegistDecoratorIf<UUID>(std::string inName, CheckConditionFuncType<UUID> inCheckFunc);
     ```
   - example
     ```cpp
     AIScriptDB<UUID>::GetInstance()->RegistDecoratorIf<UUID>("Search", AI_CHECK_CONDITION_LAMBDA(UUID){
-        // uuid -> custum uuid in your game
+        // uuid -> custom uuid in your game
         // add logic
         return true/false; -> behaviour tree decorate if result
       }
@@ -54,7 +54,7 @@ If you want to build this project, just add this porject's header to your projec
     ```cpp
     #define AI_CHECK_CONDITION_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```
-  - you can regist lamda logic by AIScriptDB class -> same decorateif
+  - you can register lamda logic by AIScriptDB class -> same decorateif
 
 + Adding ExecutionNode
   - a executionNode node needs to name (used in scirpts) and lamda logic function.
@@ -62,10 +62,10 @@ If you want to build this project, just add this porject's header to your projec
     ```cpp
     #define AI_RUNIMPL_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap, double timeDelta) -> NODE_RESULT_TYPE
     ```
-  - you can regist lamda logic by AIScriptDB class
+  - you can register lamda logic by AIScriptDB class
     ```cpp
     AIScriptDB<UUID>::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA(UUID) {
-        // uuid -> custum uuid in your game
+        // uuid -> custom uuid in your game
         // add logic
         return NST_FAILURE/NST_SUCCESS;
       }
