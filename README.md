@@ -19,7 +19,7 @@ If you want to build this project, just add this porject's source and header to 
 
 + AIScriptDB is singleton and script database class. When first turned on process, AIScriptDB must be initialized.
   <pre><code>// include header
-  #include <AIScriptDB.h>
+  #include "AIScriptDB.h"
   
   // parameter : scrpit folder path string
   AIScriptDB::GetInstance()->LoadData("./sciprts/");
