@@ -18,59 +18,69 @@ If you want to build this project, just add this porject's source and header to 
 ## Guide and Example
 
 + AIScriptDB is singleton and script database class. When first turned on process, AIScriptDB must be initialized.
-  <pre><code>// include header
-  #include "AIScriptDB.h"
+  ```cpp
+  // include header
+  #include <AIScriptDB.h>
   
   // parameter : scrpit folder path string
   AIScriptDB::GetInstance()->LoadData(".\scripts\ai\*.*");
-  </code></pre>
+  ```
 
 + Adding DecorateIf Node 
   - a decorateIf node needs to name (used in scirpts) and lamda logic function.
   - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
-    <pre><code>#define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
-    </code></pre>
+    ```cpp
+    #define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+    ```
   - you can regist lamda logic by AIScriptDB class.
-    <pre><code>void RegistDecoratorIf(std::string inName, CheckConditionFuncType inCheckFunc);
-    </code></pre>
+    ```cpp
+    void RegistDecoratorIf(std::string inName, CheckConditionFuncType inCheckFunc);
+    ```
   - example
-    <pre><code>AIScriptDB::GetInstance()->RegistDecoratorIf("Search", AI_CHECK_CONDITION_LAMBDA{
+    ```cpp
+    AIScriptDB::GetInstance()->RegistDecoratorIf("Search", AI_CHECK_CONDITION_LAMBDA{
         // uuid -> custum uuid in your game
         // add logic
         return true/false; -> behaviour tree decorate if result
       }
     );
-    </code></pre>
+    ```
     
 + Adding DecorateWhile Node 
   - a decorateWhile node needs to name (used in scirpts) and lamda logic function.
   - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
-    <pre><code>#define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
-    </code></pre>
+    ```cpp
+    #define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+    ```
   - you can regist lamda logic by AIScriptDB class -> same decorateif
 
 + Adding ExecutionNode
   - a executionNode node needs to name (used in scirpts) and lamda logic function.
   - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
-    <pre><code>#define AI_RUNIMPL_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap, double timeDelta) -> NODE_RESULT_TYPE
-    </code></pre>
+    ```cpp
+    #define AI_RUNIMPL_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap, double timeDelta) -> NODE_RESULT_TYPE
+    ```
   - you can regist lamda logic by AIScriptDB class
-    <pre><code>AIScriptDB::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA{
+    ```cpp
+    AIScriptDB::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA{
         // uuid -> custum uuid in your game
         // add logic
         return NST_FAILURE/NST_SUCCESS;
       }
     );
-    </code></pre>
+    ```
     
 + Generate Agent
-  <pre><code> std::shared_ptr<Agent> AIScriptDB::CreateAgent(std::string inAiName) </code></pre>
+  ```cpp
+  std::shared_ptr<Agent> AIScriptDB::CreateAgent(std::string inAiName)
+  ```
 
 + Update Agent
   - The agent update at game update time using uuid and elapsed time.
-  <pre><code>std::shared_ptr<Agent> aiAgent;
+  ```cpp
+  std::shared_ptr<Agent> aiAgent;
   aiAgent->_behaviourTree.Run(uuid, timeDelta);
-  </code></pre>
+  ```
 
 ## Write Script
 
@@ -80,7 +90,8 @@ You should write root node type as sequence node. If you add new node by code, y
 
 + example
   - The example show ai-agent behaviours. The agent search targets between 2 and 10 distances. And then if the agent confirm target, they follow target. If the agent can attack to target, they start attacking.
-  <pre><code>{
+  ```json
+  {
     "ai": "baseAI",
     "behaviourTree": {
       "type": "sequence",
@@ -108,7 +119,7 @@ You should write root node type as sequence node. If you add new node by code, y
       ]
     }
   }
-  </code></pre>
+  ```
   
 ## Release History
 
