@@ -13,7 +13,8 @@ https://github.com/Tencent/rapidjson
 
 ## Installation
 
-If you want to build this project, just add this porject's source and header to your project.
+If you want to build this project, just add this porject's header to your project.
+> Only used header file type.
 
 ## Guide and Example
 
@@ -23,22 +24,23 @@ If you want to build this project, just add this porject's source and header to 
   #include <AIScriptDB.h>
   
   // parameter : scrpit folder path string
-  AIScriptDB::GetInstance()->LoadData(".\scripts\ai\*.*");
+  AIScriptDB<UUID>::GetInstance()->LoadData(".\scripts\ai\*.*");
   ```
+  - The template-type means game object id-type. The UUID is used to identify the ai game object. The default option is int-type.
 
 + Adding DecorateIf Node 
   - a decorateIf node needs to name (used in scirpts) and lamda logic function.
-  - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+  - function type : [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```cpp
-    #define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+    #define AI_CHECK_CONDITION_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```
   - you can regist lamda logic by AIScriptDB class.
     ```cpp
-    void RegistDecoratorIf(std::string inName, CheckConditionFuncType inCheckFunc);
+    void RegistDecoratorIf<UUID>(std::string inName, CheckConditionFuncType<UUID> inCheckFunc);
     ```
   - example
     ```cpp
-    AIScriptDB::GetInstance()->RegistDecoratorIf("Search", AI_CHECK_CONDITION_LAMBDA{
+    AIScriptDB<UUID>::GetInstance()->RegistDecoratorIf<UUID>("Search", AI_CHECK_CONDITION_LAMBDA(UUID){
         // uuid -> custum uuid in your game
         // add logic
         return true/false; -> behaviour tree decorate if result
@@ -48,21 +50,21 @@ If you want to build this project, just add this porject's source and header to 
     
 + Adding DecorateWhile Node 
   - a decorateWhile node needs to name (used in scirpts) and lamda logic function.
-  - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+  - function type : [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```cpp
-    #define AI_CHECK_CONDITION_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+    #define AI_CHECK_CONDITION_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```
   - you can regist lamda logic by AIScriptDB class -> same decorateif
 
 + Adding ExecutionNode
   - a executionNode node needs to name (used in scirpts) and lamda logic function.
-  - function type : [](int uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
+  - function type : [](UUID uuid, ConstDoubleMapType& constDoubleMap , ConstStringMapType& constStringMap) -> bool
     ```cpp
-    #define AI_RUNIMPL_LAMBDA [](int uuid, ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap, double timeDelta) -> NODE_RESULT_TYPE
+    #define AI_RUNIMPL_LAMBDA(UUID) [](UUID uuid, ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap, double timeDelta) -> NODE_RESULT_TYPE
     ```
   - you can regist lamda logic by AIScriptDB class
     ```cpp
-    AIScriptDB::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA{
+    AIScriptDB<UUID>::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA(UUID) {
         // uuid -> custum uuid in your game
         // add logic
         return NST_FAILURE/NST_SUCCESS;
@@ -72,13 +74,13 @@ If you want to build this project, just add this porject's source and header to 
     
 + Generate Agent
   ```cpp
-  std::shared_ptr<Agent> AIScriptDB::CreateAgent(std::string inAiName)
+  std::shared_ptr<Agent<UUID>> AIScriptDB<UUID>::CreateAgent(std::string inAiName)
   ```
 
 + Update Agent
   - The agent update at game update time using uuid and elapsed time.
   ```cpp
-  std::shared_ptr<Agent> aiAgent;
+  std::shared_ptr<Agent<UUID>> aiAgent;
   aiAgent->_behaviourTree.Run(uuid, timeDelta);
   ```
 
@@ -90,6 +92,9 @@ You should write root node type as sequence node. If you add new node by code, y
 
 + example
   - The example show ai-agent behaviours. The agent search targets between 2 and 10 distances. And then if the agent confirm target, they follow target. If the agent can attack to target, they start attacking.
+  - Control Flow Node : Sequence, Selector
+  - Decorator Node : DecoratorIf, DecoratorWhile (user lamda define)
+  - Execution Node : Execution (user lamda define)
   ```json
   {
     "ai": "baseAI",
