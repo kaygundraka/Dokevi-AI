@@ -313,6 +313,7 @@ namespace DokeviAI
 		return true;
 	}
 
+	template <typename UUID>
 	bool AIScriptDB<UUID>::RegistDecoratorWhile(std::string inName, CheckConditionFuncType<UUID> inCheckFunc)
 	{
 		if (_decoratorWhileMap.find(inName) != _decoratorWhileMap.end())
@@ -328,6 +329,7 @@ namespace DokeviAI
 		return true;
 	}
 
+	template <typename UUID>
 	bool AIScriptDB<UUID>::RegistExecutionNode(std::string inName, RunImplFuncType<UUID> inRunImplFunc)
 	{
 		if (_executionNodeMap.find(inName) != _executionNodeMap.end())
@@ -343,6 +345,7 @@ namespace DokeviAI
 		return true;
 	}
 
+	template <typename UUID>
 	DecoratorIf<UUID> AIScriptDB<UUID>::GetDecoratorIf(std::string inName)
 	{
 		auto iter = _decoratorIfMap.find(inName);
