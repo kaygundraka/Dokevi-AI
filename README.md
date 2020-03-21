@@ -86,7 +86,7 @@ If you want to build this project, just add this porject's header to your projec
 
 ## Write Script
 
-The ai-agent script type is json-file. A script file is mapped onle one ai. The ai-element must write the same name as the file.
+The ai-agent script type is json-file. A script file is mapped only one ai. The ai-element must write the same name as the file.
 
 You should write root node type as sequence node. If you add new node by code, you can use by name-element in script. const-array element is delivered cpp lamda parameter. (ConstDoubleMapType& constDoubleMap, ConstStringMapType& constStringMap) The root node is looping own child array.
 
