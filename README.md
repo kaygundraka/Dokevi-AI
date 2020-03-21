@@ -22,7 +22,7 @@ If you want to build this project, just add this porject's source and header to 
   #include "AIScriptDB.h"
   
   // parameter : scrpit folder path string
-  AIScriptDB::GetInstance()->LoadData("./sciprts/");
+  AIScriptDB::GetInstance()->LoadData(".\scripts\ai\*.*");
   </code></pre>
 
 + Adding DecorateIf Node 
