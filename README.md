@@ -92,9 +92,9 @@ You should write root node type as sequence node. If you add new node by code, y
 
 + example
   - The example show ai-agent behaviours. The agent search targets between 2 and 10 distances. And then if the agent confirm target, they follow target. If the agent can attack to target, they start attacking.
-  - Control Flow Node : Sequence, Selector
-  - Decorator Node : DecoratorIf, DecoratorWhile (user lamda define)
-  - Execution Node : Execution (user lamda define)
+    + Control Flow Node : Sequence, Selector
+    + Decorator Node : DecoratorIf, DecoratorWhile (user lamda define)
+    + Execution Node : Execution (user lamda define)
   ```json
   {
     "ai": "baseAI",
