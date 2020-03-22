@@ -67,7 +67,7 @@ If you want to build this project, just add this project's header to your projec
     AIScriptDB<UUID>::GetInstance()->RegistExecutionNode("Follow", AI_RUNIMPL_LAMBDA(UUID) {
         // uuid -> custom uuid in your game
         // add logic
-        return NST_FAILURE/NST_SUCCESS;
+        return NST_FAILURE/NST_SUCCESS/NST_RUNNING;
       }
     );
     ```
