@@ -1,5 +1,5 @@
 # Dokevi-AI
-> The Dokevi-AI helps you make game ai easier on c++ client/server using json script.
+> The Dokevi-AI helps you to make the game ai easier on c++ client/server using json script.
 
 ![version](https://img.shields.io/badge/alpha-v1.0.0-blue.svg)
 ![language](https://img.shields.io/badge/language-c%2B%2B-green.svg)
