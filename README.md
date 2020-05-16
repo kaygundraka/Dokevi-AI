@@ -16,6 +16,9 @@ https://github.com/Tencent/rapidjson
 If you want to build this project, just add this project's header to your project.
 > Only used header file type.
 
+You can easy to edit script by ai-editor.
+> https://github.com/kaygundraka/Dokevi-AI-Editor
+
 ## Guide and Example
 
 + AIScriptDB is singleton and script database class. When first turned on process, AIScriptDB must be initialized.
